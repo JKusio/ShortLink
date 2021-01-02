@@ -12,5 +12,9 @@ if (env.error) {
 
 module.exports = {
     databseURL: process.env.MONGODB_URI,
-    port: parseInt(process.env.PORT, 10)
+    port: parseInt(process.env.PORT, 10),
+    api: {
+        prefix: '/api'
+    },
+    sessionSecret: process.env.SESSION_SECRET
 }

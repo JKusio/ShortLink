@@ -20,4 +20,4 @@ const Statistic = new Schema({
     },
 });
 
-module.exports = mongoose.Model('Statistic', Statistic);
+module.exports = mongoose.model('Statistic', Statistic);

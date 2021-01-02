@@ -10,7 +10,7 @@ const User = new mongoose.Schema({
     },
     lastLogin: {
         type: Date,
-        default: Date.now
+        default: null
     },
     creationDate: {
         type: Date,
@@ -18,4 +18,4 @@ const User = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.Model('User', User);
+module.exports = mongoose.model('User', User);

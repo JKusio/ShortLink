@@ -25,4 +25,4 @@ const Link = new Schema({
     },
 });
 
-module.exports = mongoose.Model('Link', Link);
+module.exports = mongoose.model('Link', Link);

@@ -1,14 +1,14 @@
 const mongooseLoader = require('./mongoose');
+const expressLoader = require('./express');
+const passportLoader = require('./passport');
 
-async function loader(app) {
-    try {
-        await mongooseLoader();
-        console.log('DB loaded and connected!');
+module.exports = async (app, passport) => {
+    await mongooseLoader();
+    console.log('DB loaded and connected!');
 
-        console.log('')
-    } catch (error) {
-        console.error(error);
-    }
+    await expressLoader(app, passport);
+    console.log('Express loaded!');
+
+    await passportLoader(passport);
+    console.log('Passport loaded!');
 }
-
-module.exports = loader;
