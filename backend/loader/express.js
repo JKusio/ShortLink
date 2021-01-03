@@ -5,7 +5,7 @@ const config = require('../config');
 const passport = require('passport');
 const session = require('express-session');
 
-module.exports = (app, passport) => {
+module.exports = (app) => {
     // passport initialization
     app.use(session({
         secret: config.sessionSecret,
@@ -33,7 +33,7 @@ module.exports = (app, passport) => {
     app.use(bodyParser.json());
 
     // add routes to app
-    app.use(config.api.prefix, routes(passport));
+    app.use(config.api.prefix, routes());
 
     // catch 404
     app.use((req, res, next) => {

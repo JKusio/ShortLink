@@ -16,5 +16,11 @@ module.exports = {
     api: {
         prefix: '/api'
     },
-    sessionSecret: process.env.SESSION_SECRET
+    sessionSecret: process.env.SESSION_SECRET,
+    mail: {
+        address: process.env.EMAIL_ADDRESS,
+        password: process.env.EMAIL_PASSWORD,
+        smtp: process.env.SMTP_ADDRESS,
+        port: parseInt(process.env.SMTP_PORT, 10)
+    }
 }

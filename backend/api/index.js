@@ -1,9 +1,9 @@
 const route = require('express').Router();
 const user = require('./routes/user');
 
-module.exports = (passport) => {
+module.exports = () => {
     const app = route;
-    user(app, passport);
+    user(app);
 
     return app;
 };

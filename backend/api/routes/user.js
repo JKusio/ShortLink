@@ -1,8 +1,10 @@
 const route = require('express').Router();
 const UserService = require('../../services/userService');
 const middleware = require('./middleware');
+const passport = require('passport');
+const events = require('../../events');
 
-module.exports = (app, passport) => {
+module.exports = (app) => {
     app.use('/users', route);
 
     route.post('/register', async (req, res) => {
@@ -14,6 +16,8 @@ module.exports = (app, passport) => {
             // validation errors
             if (err.errors) {
                 const errorKeys = Object.keys(err.errors);
+
+                console.log(err.errors);
 
                 const lengthError = errorKeys.map((key) => err.errors[key].kind.includes('length')).includes(true);
                 
@@ -29,8 +33,25 @@ module.exports = (app, passport) => {
         }
     });
 
-    route.post('/login', passport.authenticate('local'), (req, res) => {
+    route.get('/verify/:token', (req, res) => {
+        const userService = new UserService();
+        const verified = userService.verifyUser(req.params.token);
+
+        if (verified) {
+            res.status(200).send({messaage: 'User verified!'});
+        } else {
+            req.status(401).send({error: 'Couldn\'t verify user!'});
+        }
+    });
+
+    route.post('/login', passport.authenticate('local'), async (req, res) => {
+        events.emit(events.eventTypes.user.login, req.user._id);
         res.status(200).send({ message: 'Successfully logged!' });
+    });
+
+    route.post('/logout', middleware.isAuth, (req, res) => {
+        req.logOut();
+        res.status(200).send({message: 'User logged out!'});
     });
 
     route.get('/me', middleware.isAuth, async (req, res) => {
