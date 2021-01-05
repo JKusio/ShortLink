@@ -73,9 +73,9 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 ### Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* [Node.js](https://nodejs.org) - Version 14.* required
+* [Express](https://expressjs.com/)
+* [MongoDB](https://www.mongodb.com/)
 
 
 
@@ -117,6 +117,42 @@ This is an example of how to list things you need to use the software and how to
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
+
+## API
+
+### Error codes
+Even though we try to make our software have no errors at all, sometimes we'll run into them. Either because we made some errors in writing our app, users passing wrong data to the request or because the system just crashes. To make the life easier for me (and other developers) I've followed some rules of making RESTful API and added some error codes that will tell us if something went wrong.
+
+<strong>[100 codes] - Register codes</strong>
+</br>
+[101] - Username too short/long
+</br>
+[102] - Email not correct
+</br>
+[103] - Password too short/long
+</br>
+[104] - Username already taken
+</br>
+[105] - Email already taken
+</br>
+[106] - Wrong verification token
+</br>
+</br>
+<strong>[200 codes] - Login codes </strong>
+</br>
+[201] - Wrong name/password combination
+</br>
+[202] - Account not verified
+</br>
+[203] - Not authenticated
+</br>
+[204] - No admin access
+</br>
+</br>
+<strong>[300 codes] - Link codes </strong>
+</br>
+[301] - Wrong URL
+</br>
 
 
 

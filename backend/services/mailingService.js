@@ -33,4 +33,4 @@ class MailingService {
     }
 }
 
-module.exports = MailingService;
+module.exports = new MailingService();

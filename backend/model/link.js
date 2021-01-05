@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Link = new Schema({
-    hash: {
+    code: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     originalURL: {
         type: String,
@@ -13,11 +12,18 @@ const Link = new Schema({
     },
     creationDate: {
         type: Date,
-        required: true
+        default: Date.now
     },
     expirationDate: {
         type: Date,
-        required: true
+        /**
+         * Default expiration date is one week from creation date
+         */
+        default: (() => {
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 7);
+            return expirationDate;
+        })()
     },
     userID: {
         type: Schema.Types.ObjectId,

@@ -4,9 +4,10 @@ const routes = require('../api');
 const config = require('../config');
 const passport = require('passport');
 const session = require('express-session');
+const express = require('express');
 
 module.exports = (app) => {
-    // passport initialization
+    app.use(express.urlencoded({ extended: false }))
     app.use(session({
         secret: config.sessionSecret,
         resave: false,
@@ -31,6 +32,9 @@ module.exports = (app) => {
 
     // convert req.body to json
     app.use(bodyParser.json());
+
+    // passport initialization
+    
 
     // add routes to app
     app.use(config.api.prefix, routes());

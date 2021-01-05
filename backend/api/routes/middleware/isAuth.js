@@ -1,4 +1,12 @@
 module.exports = (req, res, next) => {
     if (req.isAuthenticated()) return next();
-    res.status(401).send({ error: 'You are not authenticated!' });
+    return res.status(401).send({ code: 200,
+        type: 'Login error',
+        errors: [
+            {
+                code: 203,
+                message: "Not authenticated"
+            }
+        ]  
+    });
 };
