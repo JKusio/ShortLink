@@ -1,7 +1,8 @@
 const mongooseLoader = require('./mongoose');
 const expressLoader = require('./express');
 const passportLoader = require('./passport');
-const linksCounter = require('./linksCounter');
+const linksCounterLoader = require('./linksCounter');
+const mailingLoader = require('./mailing');
 
 module.exports = async (app) => {
     await mongooseLoader();
@@ -13,6 +14,9 @@ module.exports = async (app) => {
     await expressLoader(app);
     console.log('Express loaded!');
 
-    await linksCounter();
+    await linksCounterLoader();
     console.log('Links counter initalized!');
+
+    mailingLoader();
+    console.log('Maling service loaded!');
 }

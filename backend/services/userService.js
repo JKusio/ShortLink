@@ -2,10 +2,13 @@ const User = require('../model/user');
 const EmailVerification = require('../model/emailVerification');
 const events = require('../events');
 const nanoid = require('nanoid').nanoid;
+// Error handling
+const BaseError = require('../errors/baseError');
+const errorTypes = require('../errors/errorTypes');
+const httpStatusCodes = require('../errors/httpStatusCodes');
+const mongoose = require('mongoose');
 
 class UserService {
-    constructor() {}
-
     async registerUser(name, email, password) {
         const userRecord = new User({
             name,
@@ -27,7 +30,28 @@ class UserService {
         } catch (err) {
             userRecord.remove();
             emailVerification.remove();
-            throw err;
+
+            if (err.message != null && err.message.includes('ECONNREFUSED')) {
+                throw new BaseError(errorTypes.serverErrors.mongodbConnectionError, httpStatusCodes.INTERNAL_SERVER, false);
+            } 
+
+            const errors = [];
+
+            if (err.errors) { 
+                const errorKeys = Object.keys(err.errors);
+                if (errorKeys.includes('name')) errors.push(errorTypes.registerErrors.wrongUsernameLength);
+                if (errorKeys.includes('credentials.email')) errors.push(errorTypes.registerErrors.wrongEmail);
+                if (errorKeys.includes('credentials.password')) errors.push(errorTypes.registerErrors.wrongPasswordLength);
+
+                throw new BaseError(errors, httpStatusCodes.BAD_REQUEST, true);
+            }
+            
+            if (err.code === 11000) {
+                if (err.keyPattern.name) errors.push(errorTypes.registerErrors.usernameTaken);
+                if (err.keyPattern['credentials.email']) errors.push(errorTypes.registerErrors.emailTaken);
+            }
+
+            throw new BaseError(errors, httpStatusCodes.BAD_REQUEST, true);
         }
 
         events.emit(events.eventTypes.user.register, {name, email, token});
@@ -38,15 +62,12 @@ class UserService {
     async verifyUser(token) {
         const emailVerification = await EmailVerification.findOne({token});
 
-        if (!emailVerification) {
-            return false;
-        }
+        if (!emailVerification) throw new BaseError(errorTypes.registerErrors.wrongVerficationToken, httpStatusCodes.BAD_REQUEST, true);
 
         const userID = emailVerification.userID;
 
         try {
             await User.findOneAndUpdate({_id: userID}, {$set: { 'credentials.emailVerified': true }});
-            return true;
         } catch(err) {
             throw err;
         }
@@ -66,6 +87,14 @@ class UserService {
             .exec();
 
         return allUsers;
+    }
+
+    async getUserByID(id) {
+        if (mongoose.isValidObjectId(id)) {
+            var user = await User.findOne({_id: id});
+        }
+        if (user) return user;
+        return await User.findOne({name: id});
     }
 }
 

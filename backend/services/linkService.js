@@ -3,9 +3,6 @@ const Link = require('../model/link');
 const LinksCounter = require('../model/linksCounter'); 
 
 class LinkService {
-    constructor() {
-    }
-
     #checkIfURLIsCorrect = (URL) => {
         var pattern = new RegExp('^(https?:\\/\\/)?'+ 
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+

@@ -16,7 +16,7 @@
     Making this project was a great opportunity to learn and test some new things! :fire:
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    Demo avialable soon! (Need to do frontend)
     ·
     <a href="https://github.com/JKusio/ShortLink/issues">Report Bug</a>
     ·
@@ -24,9 +24,6 @@
   </p>
 </p>
 
-
-
-<!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
@@ -52,35 +49,24 @@
   </ol>
 </details>
 
-
-
-<!-- ABOUT THE PROJECT -->
 ## About The Project
+One of the most important things for everyone is to constantly keep on learning new things. That's why I've decided to create this project, since there weren't any MEVN (or MEN for now since Vue.js frontend will be added later) stack projects on my GitHub page. This project is quite simple. You give your very long URL to the API and it returns a shortened version you can use! I've also added users and admins that can perform more actions! I've also added statistics for each link which monitors how many times each link was clicked and from what region!
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+This project was a great opportunity to learn Node itself! It gave me a better understanding of using modules and using different design patterns in it. </br>
+I've also used express as my web application framework. It is a great tool and I'm glad I could be using it, not only reading about it! </br>
+I've selected MongoDB as my database, and used mongoose ORM. It really simplified a lot of things! </br>
 
 ### Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Node.js](https://nodejs.org) - Version 14.* required
+* [Node.js](https://nodejs.org)
 * [Express](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
+* [Vue.js](https://vuejs.org/) - Will be added soon for frontend
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
+<!-- ## Getting Started
 
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
@@ -111,17 +97,21 @@ This is an example of how to list things you need to use the software and how to
 
 
 
-<!-- USAGE EXAMPLES -->
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 ## API
 
 ### Error codes
 Even though we try to make our software have no errors at all, sometimes we'll run into them. Either because we made some errors in writing our app, users passing wrong data to the request or because the system just crashes. To make the life easier for me (and other developers) I've followed some rules of making RESTful API and added some error codes that will tell us if something went wrong.
+
+Example response when we send wrong data during registration!
+</br>
+<img src="images/example_error.png" alt="Error example" width="400">
+
 
 <strong>[100 codes] - Register codes</strong>
 </br>
@@ -154,16 +144,6 @@ Even though we try to make our software have no errors at all, sometimes we'll r
 [301] - Wrong URL
 </br>
 
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -183,17 +163,15 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
-<!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Your Name - [@JakubKusiowski](https://twitter.com/JakubKusiowski) - jakubkusiowski@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/JKusio/ShortLink](https://github.com/JKusio/ShortLink)
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
+<!-- ## Acknowledgements
 * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Img Shields](https://shields.io)
 * [Choose an Open Source License](https://choosealicense.com)
@@ -204,7 +182,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 * [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
 * [Sticky Kit](http://leafo.net/sticky-kit)
 * [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
+* [Font Awesome](https://fontawesome.com) -->
 
 
 

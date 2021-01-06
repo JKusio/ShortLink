@@ -1,12 +1,9 @@
+// Error handling
+const BaseError = require('../../../errors/baseError');
+const errorTypes = require('../../../errors/errorTypes');
+const httpStatusCodes = require('../../../errors/httpStatusCodes');
+
 module.exports = (req, res, next) => {
     if (req.isAuthenticated()) return next();
-    return res.status(401).send({ code: 200,
-        type: 'Login error',
-        errors: [
-            {
-                code: 203,
-                message: "Not authenticated"
-            }
-        ]  
-    });
+    throw new BaseError(errorTypes.loginErrors.notAuthenticated, httpStatusCodes.UNAOTHORIZED, true);
 };

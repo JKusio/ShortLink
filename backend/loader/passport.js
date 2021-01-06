@@ -2,22 +2,26 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('../model/user');
 const passport = require('passport');
+// Error handling
+const BaseError = require('../errors/baseError');
+const errorTypes = require('../errors/errorTypes');
+const httpStatusCodes = require('../errors/httpStatusCodes');
 
 module.exports = () => {
     passport.use(new LocalStrategy({usernameField: 'name'}, async (name, password, done) => {
         const user = await User.findOne({name});
         if (!user) {
-            return done(null, false, { code: 201 });
+            return done(new BaseError(errorTypes.loginErrors.wrongCredentials, httpStatusCodes.BAD_REQUEST, true));
         }
 
         try {
             if (await bcrypt.compare(password, user.credentials.password)) {
                 if (!user.credentials.emailVerified) {
-                    return done(null, false, { code: 202 });
+                    return done(new BaseError(errorTypes.loginErrors.accountNotVerified, httpStatusCodes.UNAOTHORIZED, true));
                 }        
                 return done(null, user);
             } else {
-                return done(null, false, { code: 201});
+                return done(new BaseError(errorTypes.loginErrors.wrongCredentials, httpStatusCodes.BAD_REQUEST, true));
             }
         } catch (err) {
             throw err;

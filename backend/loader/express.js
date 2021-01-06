@@ -5,6 +5,11 @@ const config = require('../config');
 const passport = require('passport');
 const session = require('express-session');
 const express = require('express');
+// Error handling
+const BaseError = require('../errors/baseError');
+const errorTypes = require('../errors/errorTypes');
+const httpStatusCodes = require('../errors/httpStatusCodes');
+const errorHandler = require('../errors/errorHandler');
 
 module.exports = (app) => {
     app.use(express.urlencoded({ extended: false }))
@@ -41,23 +46,23 @@ module.exports = (app) => {
 
     // catch 404
     app.use((req, res, next) => {
-        const err = new Error('Not found');
-        err['status'] = 404;
+        const err = new BaseError(errorTypes.otherErrors.notFound, httpStatusCodes.NOT_FOUND, true);
         next(err);
     });
 
-    // error handler
+    // handle base errors
     app.use((err, req, res, next) => {
-        if (err.name === 'UnauthorizedError') {
-            return res.status(err.status)
-                .send({ message: err.message })
-                .end();
+        if (errorHandler.isTrustedError(err)) {
+            return res.status(err.statusCode)
+            .json({ errors: JSON.parse(err.message) })
+            .end();
         }
-        return next(err);
+        next(err);
     });
 
+    // handle all other errors
     app.use((err, req, res, next) => {
-        res.status(err.status || 500);
+        res.status(500);
         res.json({
             errors: {
                 message: err.message
