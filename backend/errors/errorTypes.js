@@ -47,12 +47,32 @@ module.exports = {
         wrongURL: {
             code: 301,
             message: 'Wrong URL'
+        },
+        customURLTaken: {
+            code: 302,
+            message: 'Custom URL taken'
+        },
+        wrongCustomURL: {
+            code: 303,
+            message: 'Custom URL has forbidden characters'
+        },
+        wrongExpirationDateFormat: {
+            code: 304,
+            message: 'Wrong expiration date format'
+        },
+        expirationDatePassed: {
+            code: 305,
+            message: 'Expiration date passed'
         }
     },
     serverErrors: {
         mongodbConnectionError: {
             code: 401,
             message: 'No MongoDB connection'
+        },
+        linksCounterError: {
+            code: 402,
+            message: 'No LinksCounter found'
         }
     },
     otherErrors: {

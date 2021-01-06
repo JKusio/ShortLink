@@ -17,14 +17,14 @@ module.exports = (app) => {
      * Add new shortened link
      * You don't have to be logged in to add one
      *  */ 
-    route.post('/', async(req, res) => {
+    route.post('/', async(req, res, next) => {
         // optional chaining was added in node 14.0 version
         const userID = req.user?._id;
         try {
-            await linkService.createLink(req.body.URL, userID, req.body.code, req.body.expirationDate);
-            res.status(200).json({success: "done!"});
+            const link = await linkService.createLink(req.body.URL, `${req.protocol}://${req.get('host')}`, userID, req.body.code, req.body.expirationDate);
+            res.status(200).json(link);
         } catch (err) {
-            res.status(500).json({error: 'error!'});
+            next(err);
         }
     });
 };

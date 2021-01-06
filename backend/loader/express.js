@@ -38,8 +38,10 @@ module.exports = (app) => {
     // convert req.body to json
     app.use(bodyParser.json());
 
-    // passport initialization
-    
+    // LINK - redirect to correct url
+    app.get('/:id', (req, res, next) => {
+        res.send('baka');
+    });
 
     // add routes to app
     app.use(config.api.prefix, routes());

@@ -13,11 +13,10 @@ const Statistic = new Schema({
     referral: {
         type: String
     },
-    hash: {
-        type: Schema.Types.ObjectId,
-        ref: 'Link',
+    linkCode: {
+        type: String,
         required: true
-    },
+    }
 });
 
 module.exports = mongoose.model('Statistic', Statistic);

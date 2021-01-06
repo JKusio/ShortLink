@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const Link = new Schema({
     code: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     originalURL: {
         type: String,
@@ -15,20 +16,21 @@ const Link = new Schema({
         default: Date.now
     },
     expirationDate: {
-        type: Date,
-        /**
-         * Default expiration date is one week from creation date
-         */
-        default: (() => {
-            const expirationDate = new Date();
-            expirationDate.setDate(expirationDate.getDate() + 7);
-            return expirationDate;
-        })()
+        type: Date
     },
     userID: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+});
+
+Link.pre('save', async function(next) {
+    if (this.isModified('expirationDate')) return next();
+
+    const expirationDate = this.creationDate;
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    this.expirationDate = expirationDate;
+    next();
 });
 
 module.exports = mongoose.model('Link', Link);
