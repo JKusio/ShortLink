@@ -36,12 +36,20 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#instalation">Instalation</a></li>
+        <li><a href="#configuring-env-file">Configuring .env file</a></li>
+        <li><a href="#nodejs">Node.js</a></li>
+        <li><a href="#mongodb-setup">MongoDB setup</a></li>
+        <li><a href="#email-setup">Email setup</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li>
+      <a href="#api">API</a>
+      <ul>
+        <li><a href="#error-codes">Error codes</a></li>
+      </ul>
+    </li>    
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -58,50 +66,65 @@ I've selected MongoDB as my database, and used mongoose ORM. It really simplifie
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Node.js](https://nodejs.org)
+* [Node.js](https://nodejs.org) - 
 * [Express](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/)
 * [Vue.js](https://vuejs.org/) - Will be added soon for frontend
 
 
 
-<!-- ## Getting Started
+## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+To get a local copy up and running follow these simple steps! </br>
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
+3. Configure .env file
 
 
+### Configuring .env file
+For now only the backend is avialable! </br>
+In backend directory you'll find .env.example. Create a copy of, it in the same directory, named .env </br>
+**It is crucial for the app to load correctly.** It contains the most important options for the application! 
+
+### Node.js
+Since my code uses some newer js (like optional chaining), you'll need to use Node.js version at least 14.*
+
+### MongoDB setup
+I've used MongoDB Docker image.
+</br> 
+[MongoDB Image](https://hub.docker.com/_/mongo)
+</br>
+If you have your MongoDB up and running you'll need to change **MONGODB_URI** in .env file.
+```
+MONGODB_URI='mongodb://localhost'
+```
+
+### Email setup
+I've used free and fake ethereal mails for developement. </br>
+It doesn't send any mails, but you'll be able to check what would be sent on their site. </br>
+[Ethereal Mail](https://ethereal.email/) </br>
+You'll need to change those parameters in .env file
+```
+EMAIL_ADDRESS=jankowalski@ethereal.email
+EMAIL_PASSWORD=12345678
+SMTP_ADDRESS=smtp.ethereal.email
+SMTP_PORT=587
+```
 
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_ -->
+_For more examples, please refer to the [Documentation](https://example.com)_
 
 ## API
 
@@ -154,14 +177,10 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
-
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-
 
 ## Contact
 
@@ -169,24 +188,13 @@ Your Name - [@JakubKusiowski](https://twitter.com/JakubKusiowski) - jakubkusiows
 
 Project Link: [https://github.com/JKusio/ShortLink](https://github.com/JKusio/ShortLink)
 
-
-
-<!-- ## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+## Acknowledgements
+* [Docker](https://www.docker.com/)
+* [Passport.js](http://www.passportjs.org/)
+* [Mongoose](https://mongoosejs.com/)
+* [Ethereal Mail](https://ethereal.email/)
+* [Nodemailer](https://nodemailer.com/about/)
 * [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com) -->
-
-
-
-
 
 [stars-shield]: https://img.shields.io/github/stars/JKusio/ShortLink.svg?style=for-the-badge
 [stars-url]: https://github.com/JKusio/ShortLink/stargazers
