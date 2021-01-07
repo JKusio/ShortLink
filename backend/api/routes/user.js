@@ -3,8 +3,6 @@ const userService = require('../../services/userService');
 const middleware = require('./middleware');
 const passport = require('passport');
 const events = require('../../events');
-const BaseError = require('../../errors/baseError');
-const errorTypes = require('../../errors/errorTypes');
 
 module.exports = (app) => {
     app.use('/users', route);

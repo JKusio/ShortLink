@@ -1,4 +1,3 @@
-const config = require('../config');
 const Link = require('../model/link');
 const LinksCounter = require('../model/linksCounter'); 
 // Error handling
@@ -37,21 +36,6 @@ class LinkService {
             if (!this.characters.includes(code[i])) return false;
         }
         return true;
-    }
-
-    #getIDFromShortCode = (code) => {
-        let id = 0;
-
-        for (let i = 0; i < URL.length; i++) {
-            if ('a' <= URL[i] && URL[i] <= 'z') 
-                id = id * 62 + URL[i].charCodeAt(0) - 'a'.charCodeAt(0); 
-            if ('A' <= URL[i] && URL[i] <= 'Z') 
-                id = id * 62 + URL[i].charCodeAt(0) - 'A'.charCodeAt(0) + 26; 
-            if ('0' <= URL[i] && URL[i] <= '9') 
-                id = id * 62 + URL[i].charCodeAt(0) - '0'.charCodeAt(0) + 52;     
-        }
-
-        return id;
     }
 
     async getAllLinks() {
@@ -111,6 +95,16 @@ class LinkService {
             link.remove();
             throw err;
         }
+    }
+
+    async getOriginalURL(code) {
+        const link = await Link.findOne({code});
+
+        if (!link) throw new BaseError(errorTypes.linkErrors.linkNotExisting, httpStatusCodes.BAD_REQUEST, true);
+
+        if (Date.now() >= link.expirationDate) throw new BaseError(errorTypes.linkErrors.linkExpired, true);
+
+        return link.originalURL;
     }
 }
 

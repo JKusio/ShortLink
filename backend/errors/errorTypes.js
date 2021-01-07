@@ -63,6 +63,14 @@ module.exports = {
         expirationDatePassed: {
             code: 305,
             message: 'Expiration date passed'
+        },
+        linkNotExisting: {
+            code: 306,
+            message: 'Link does not exists'
+        },
+        linkExpired: {
+            code: 307,
+            message: 'Link expired'
         }
     },
     serverErrors: {

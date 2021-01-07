@@ -184,7 +184,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [@JakubKusiowski](https://twitter.com/JakubKusiowski) - jakubkusiowski@gmail.com
+Jakub Kusiowski - [@JakubKusiowski](https://twitter.com/JakubKusiowski) - jakubkusiowski@gmail.com
 
 Project Link: [https://github.com/JKusio/ShortLink](https://github.com/JKusio/ShortLink)
 

@@ -2,15 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Statistic = new Schema({
-    country: {
-        type: String,
-        required: true
-    },
     accessTime: {
         type: Date,
-        required: true
+        default: Date.now
     },
-    referral: {
+    referer: {
+        type: String
+    },
+    language: {
         type: String
     },
     linkCode: {
