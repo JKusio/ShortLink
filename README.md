@@ -128,6 +128,7 @@ You will find collection with all requests in backend **directory**.
 
 ### Basic informations 📋
 This application is simple, and so is it's structure.
+</br>
 <img src="images/structure.png" alt="Error example" width="400">
 </br>
 Using the API you can register new users. On register event is emitted and verification email is sent to the user! You can also perform basic oprations like logging in, logging out, chaning password and email address. </br>
