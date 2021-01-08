@@ -1,16 +1,16 @@
 module.exports = {
-    registerErrors: {
-        wrongUsernameLength: {
+    credentialsError: {
+        wrongUsername: {
             code: 101,
-            message: 'Username too short/long'
+            message: 'Username not correct! It needs to be between 5 and 16 characters and contain only standard alphabet characters, numbers and . - _'
         },
         wrongEmail: {
             code: 102,
             message: 'Email not correct'
         },
-        wrongPasswordLength: {
+        wrongPassword: {
             code: 103,
-            message: 'Password too short/long'
+            message: 'Password not correct! It needs to be between 8 and 24 characters. It needs to contain at least 1 number and 1 special character!'
         },
         usernameTaken: {
             code: 104,
@@ -83,10 +83,16 @@ module.exports = {
             message: 'No LinksCounter found'
         }
     },
+    userErrors: {
+        userDoesNotExists: {
+            code: 501,
+            message: 'User does not exists'
+        }
+    },
     otherErrors: {
         notFound: {
-            code: 501,
+            code: 601,
             message: 'No URL found'
         }
-    }
+    },
 }

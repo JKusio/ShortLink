@@ -43,13 +43,14 @@
         <li><a href="#email-setup">Email setup</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li>
-      <a href="#api">API</a>
+      <a href="#backend">Backend</a>
       <ul>
-        <li><a href="#error-codes">Error codes</a></li>
+        <li><a href="#basic-informations">Basic informations</a></li>
+        <li><a href="#basic-informations">API</a></li>
       </ul>
     </li>    
+    <li><a href="#wip">WIP</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -120,15 +121,30 @@ SMTP_ADDRESS=smtp.ethereal.email
 SMTP_PORT=587
 ```
 
-## Usage
+## Backend
+The backend is running on node with express.js and mongoDB. </br>
+You can import the postman collection to your instansce of Postman. </br>
+You will find collection with all requests in backend **directory**.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Basic informations
+This application is simple, and so is it's structure.
+<img src="images/structure.png" alt="Error example" width="400">
+</br>
+Using the API you can register new users. On register event is emitted and verification email is sent to the user! You can also perform basic oprations like logging in, logging out, chaning password and email address. </br>
+Admins can also get list of all users, by id or delete them.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Links can be created even by anyone! Even by unregistred user!
+</br>
+When user is logged in, the link will be assign to the account.
+In request you can set custom code or generate one by id. The short link generator works the same as in the cutt.ly website. I've could use **n random characters generator** but that wouldn't be as efficient as just generating a **n characters long unique code** based on id. Each time new short link is generated **id is increased by one**.
 
-## API
+When someone visits the short link an event is emitted and statistics are stored in the databse. The statistic schema contains **access time**, **referer** (from header) and **language** (from header).
 
-### Error codes
+### API
+I've created many endpoints, but there are still some in developement! </br>
+</br>
+
+**Error handling** </br>
 Even though we try to make our software have no errors at all, sometimes we'll run into them. Either because we made some errors in writing our app, users passing wrong data to the request or because the system just crashes. To make the life easier for me (and other developers) I've followed some rules of making RESTful API and added some error codes that will tell us if something went wrong.
 
 Example response when we send wrong data during registration!
@@ -138,11 +154,11 @@ Example response when we send wrong data during registration!
 
 <strong>[100 codes] - Register codes</strong>
 </br>
-[101] - Username too short/long
+[101] - Username not correct! It needs to be between 5 and 16 characters and contain only standard alphabet characters, numbers and . - _
 </br>
 [102] - Email not correct
 </br>
-[103] - Password too short/long
+[103] - Password not correct! It needs to be between 8 and 24 characters. It needs to contain at least 1 number and 1 special character!
 </br>
 [104] - Username already taken
 </br>
@@ -166,6 +182,41 @@ Example response when we send wrong data during registration!
 </br>
 [301] - Wrong URL
 </br>
+[302] - Custom URL taken
+</br>
+[303] - Custom URL has forbidden characters
+</br>
+[304] - Wrong expiration date format
+</br>
+[305] - Expiration date passed
+</br>
+[306] - Link does not exists
+</br>
+</br>
+<strong>[400 codes] - Server codes </strong>
+</br>
+[401] - No MongoDB connection
+</br>
+[402] - No LinksCounter found
+</br>
+</br>
+<strong>[500 codes] - User codes </strong>
+</br>
+[501] - User does not exists
+</br>
+</br>
+<strong>[600 codes] - Other codes </strong>
+</br>
+[601] - No URL found
+</br>
+
+## WIP
+* More link and statistic endpoints (CRUD operations)
+* Query filters
+* Query sorting
+* Pagination
+* Sending email with critical errors to admin
+* Tests
 
 ## Contributing
 

@@ -6,8 +6,7 @@ const UserCredentials = new Schema({
     password: {
         type: String,
         required: true,
-        minlength: 8,
-        maxlength: 32
+        match: [/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,24}$/, 'Password not correct!']
     },
     passwordSalt: {
         type: String
@@ -16,7 +15,7 @@ const UserCredentials = new Schema({
         type: String,
         unique: true,
         required: true,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'aaa']
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email not correct!']
     },
     emailVerified: {
         type: Boolean,
@@ -33,8 +32,7 @@ const User = new Schema({
     name: {
         type: String,
         unique: true,
-        minlength: 5,
-        maxlength: 24,
+        match: [/^[0-9a-zA-Z_.-]{5,16}/, 'Username not correct!'],
         index: true
     },
     lastLogin: {
@@ -46,7 +44,10 @@ const User = new Schema({
         default: Date.now
     },
     credentials: UserCredentials,
-    link: ['Links']
+    links: {
+        type: [String],
+        default: []
+    }
 });
 
 // we can't use arrow functions here because there is no "this" binding in it

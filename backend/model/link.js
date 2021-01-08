@@ -5,7 +5,8 @@ const Link = new Schema({
     code: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     originalURL: {
         type: String,
@@ -21,7 +22,7 @@ const Link = new Schema({
     userID: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    },
+    }
 });
 
 Link.pre('save', async function(next) {
