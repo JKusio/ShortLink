@@ -11,61 +11,61 @@
   <h3 align="center">Short Link</h3>
 
   <p align="center">
-    My small project to makes links short! :globe_with_meridians:
+    My small project to makes links short! 🌍
     <br />
-    Making this project was a great opportunity to learn and test some new things! :fire:
+    Making this project was a great opportunity to learn and test some new things! 🔥
     <br />
     <br />
     Demo avialable soon! (Need to do frontend)
     ·
     <a href="https://github.com/JKusio/ShortLink/issues">Report Bug</a>
     ·
-    <a href="https://github.com/JKusio/ShortLink/issues">Request Feature</a>
+    <a href="https://github.com/JKusio/ShortLink/issues">Request Feature</a> 
   </p>
 </p>
 
 <details open="open">
-  <summary>Table of Contents</summary>
+  <summary>Table of Contents :notebook_with_decorative_cover:	</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project-🔍">About The Project 🔍</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with-📐">Built With 📐</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#getting-started-0️⃣">Getting Started 0️⃣</a>
       <ul>
-        <li><a href="#instalation">Instalation</a></li>
-        <li><a href="#configuring-env-file">Configuring .env file</a></li>
-        <li><a href="#nodejs">Node.js</a></li>
-        <li><a href="#mongodb-setup">MongoDB setup</a></li>
-        <li><a href="#email-setup">Email setup</a></li>
+        <li><a href="#instalation-💾">Instalation 💾</a></li>
+        <li><a href="#configuring-env-file-📝">Configuring .env file 📝</a></li>
+        <li><a href="#nodejs-💝">Node.js 💝</a></li>
+        <li><a href="#mongodb-setup-📁">MongoDB setup 📁</a></li>
+        <li><a href="#email-setup-📧">Email setup 📧</a></li>
       </ul>
     </li>
     <li>
-      <a href="#backend">Backend</a>
+      <a href="#backend-🌐">Backend 🌐</a>
       <ul>
-        <li><a href="#basic-informations">Basic informations</a></li>
-        <li><a href="#basic-informations">API</a></li>
+        <li><a href="#basic-informations-📋">Basic informations 📋</a></li>
+        <li><a href="#basic-informations-📲">API 📲</a></li>
       </ul>
-    </li>    
-    <li><a href="#wip">WIP</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    </li>   
+    <li><a href="#wip-🚧">WIP 🚧</a></li>
+    <li><a href="#contributing-✋">Contributing ✋</a></li>
+    <li><a href="#license-📋">License 📋</a></li>
+    <li><a href="#contact-📞">Contact 📞</a></li>
+    <li><a href="#acknowledgements-❗">Acknowledgements  ❗</a></li>
   </ol>
 </details>
 
-## About The Project
+## About The Project 🔍
 One of the most important things for everyone is to constantly keep on learning new things. That's why I've decided to create this project, since there weren't any MEVN (or MEN for now since Vue.js frontend will be added later) stack projects on my GitHub page. This project is quite simple. You give your very long URL to the API and it returns a shortened version you can use! I've also added users and admins that can perform more actions! I've also added statistics for each link which monitors how many times each link was clicked and from what region!
 
 This project was a great opportunity to learn Node itself! It gave me a better understanding of using modules and using different design patterns in it. </br>
 I've also used express as my web application framework. It is a great tool and I'm glad I could be using it, not only reading about it! </br>
 I've selected MongoDB as my database, and used mongoose ORM. It really simplified a lot of things! </br>
 
-### Built With
+### Built With 📐
 
 * [Node.js](https://nodejs.org) - 
 * [Express](https://expressjs.com/)
@@ -74,11 +74,11 @@ I've selected MongoDB as my database, and used mongoose ORM. It really simplifie
 
 
 
-## Getting Started
+## Getting Started 0️⃣
 
 To get a local copy up and running follow these simple steps! </br>
 
-### Installation
+### Installation 💾
 
 1. Clone the repo
    ```sh
@@ -91,15 +91,15 @@ To get a local copy up and running follow these simple steps! </br>
 3. Configure .env file
 
 
-### Configuring .env file
+### Configuring .env file 📝
 For now only the backend is avialable! </br>
 In backend directory you'll find .env.example. Create a copy of, it in the same directory, named .env </br>
 **It is crucial for the app to load correctly.** It contains the most important options for the application! 
 
-### Node.js
+### Node.js 💝
 Since my code uses some newer js (like optional chaining), you'll need to use Node.js version at least 14.*
 
-### MongoDB setup
+### MongoDB setup 📁
 I've used MongoDB Docker image.
 </br> 
 [MongoDB Image](https://hub.docker.com/_/mongo)
@@ -109,7 +109,7 @@ If you have your MongoDB up and running you'll need to change **MONGODB_URI** in
 MONGODB_URI='mongodb://localhost'
 ```
 
-### Email setup
+### Email setup 📧
 I've used free and fake ethereal mails for developement. </br>
 It doesn't send any mails, but you'll be able to check what would be sent on their site. </br>
 [Ethereal Mail](https://ethereal.email/) </br>
@@ -121,12 +121,12 @@ SMTP_ADDRESS=smtp.ethereal.email
 SMTP_PORT=587
 ```
 
-## Backend
+## Backend 🌐
 The backend is running on node with express.js and mongoDB. </br>
 You can import the postman collection to your instansce of Postman. </br>
 You will find collection with all requests in backend **directory**.
 
-### Basic informations
+### Basic informations 📋
 This application is simple, and so is it's structure.
 <img src="images/structure.png" alt="Error example" width="400">
 </br>
@@ -140,7 +140,7 @@ In request you can set custom code or generate one by id. The short link generat
 
 When someone visits the short link an event is emitted and statistics are stored in the databse. The statistic schema contains **access time**, **referer** (from header) and **language** (from header).
 
-### API
+### API 📲
 I've created many endpoints, but there are still some in developement! </br>
 </br>
 
@@ -210,7 +210,7 @@ Example response when we send wrong data during registration!
 [601] - No URL found
 </br>
 
-## WIP
+## WIP  🚧
 * More link and statistic endpoints (CRUD operations)
 * Query filters
 * Query sorting
@@ -218,7 +218,7 @@ Example response when we send wrong data during registration!
 * Sending email with critical errors to admin
 * Tests
 
-## Contributing
+## Contributing ✋
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -229,17 +229,17 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 <!-- LICENSE -->
-## License
+## License 📋
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## Contact
+## Contact 📞
 
 Jakub Kusiowski - [@JakubKusiowski](https://twitter.com/JakubKusiowski) - jakubkusiowski@gmail.com
 
 Project Link: [https://github.com/JKusio/ShortLink](https://github.com/JKusio/ShortLink)
 
-## Acknowledgements
+## Acknowledgements ❗
 * [Docker](https://www.docker.com/)
 * [Passport.js](http://www.passportjs.org/)
 * [Mongoose](https://mongoosejs.com/)
