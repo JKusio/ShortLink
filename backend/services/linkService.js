@@ -1,9 +1,9 @@
 const Link = require('../model/link');
 const LinksCounter = require('../model/linksCounter'); 
 // Error handling
-const BaseError = require('../errors/baseError');
-const errorTypes = require('../errors/errorTypes');
-const httpStatusCodes = require('../errors/httpStatusCodes');
+const BaseError = require('../error/baseError');
+const errorTypes = require('../error/errorTypes');
+const httpStatusCodes = require('../error/httpStatusCodes');
 
 class LinkService {
     characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';

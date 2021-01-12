@@ -1,7 +1,9 @@
 class BaseError extends Error {
     constructor(errorTypes, statusCode, isOperational) {
-        super(JSON.stringify(errorTypes));
+        super(errorTypes.map((errorType) => errorType.message).join("\n"));
         Object.setPrototypeOf(this, new.target.prototype);
+        
+        this.errorTypes = errorTypes;
 
         this.statusCode = statusCode;
         // operational errors are expected errors like user giving bad data in request etc.

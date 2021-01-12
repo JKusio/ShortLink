@@ -1,7 +1,7 @@
 // Error handling
-const BaseError = require('../../../errors/baseError');
-const errorTypes = require('../../../errors/errorTypes');
-const httpStatusCodes = require('../../../errors/httpStatusCodes');
+const BaseError = require('../../../error/baseError');
+const errorTypes = require('../../../error/errorTypes');
+const httpStatusCodes = require('../../../error/httpStatusCodes');
 
 module.exports = (req, res, next) => {
     if (req.isAuthenticated()) return next();

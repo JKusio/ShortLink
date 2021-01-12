@@ -1,8 +1,8 @@
 const userService = require('../../../services/userService');
 // Error handling
-const BaseError = require('../../../errors/baseError');
-const errorTypes = require('../../../errors/errorTypes');
-const httpStatusCodes = require('../../../errors/httpStatusCodes');
+const BaseError = require('../../../error/baseError');
+const errorTypes = require('../../../error/errorTypes');
+const httpStatusCodes = require('../../../error/httpStatusCodes');
 
 async function isAdminMiddleware() {
 

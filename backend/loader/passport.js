@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const User = require('../model/user');
 const passport = require('passport');
 // Error handling
-const BaseError = require('../errors/baseError');
-const errorTypes = require('../errors/errorTypes');
-const httpStatusCodes = require('../errors/httpStatusCodes');
+const BaseError = require('../error/baseError');
+const errorTypes = require('../error/errorTypes');
+const httpStatusCodes = require('../error/httpStatusCodes');
 
 module.exports = () => {
     passport.use(new LocalStrategy({usernameField: 'name'}, async (name, password, done) => {

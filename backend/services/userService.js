@@ -1,14 +1,13 @@
 const User = require('../model/user');
 const EmailVerification = require('../model/emailVerification');
-const events = require('../events');
+const events = require('../event');
 const nanoid = require('nanoid').nanoid;
 const mongoose = require('mongoose');
 // Error handling
-const BaseError = require('../errors/baseError');
-const errorTypes = require('../errors/errorTypes');
-const httpStatusCodes = require('../errors/httpStatusCodes');
-const ErrorHandler = require('../errors/errorHandler');
-const errorHandler = require('../errors/errorHandler');
+const BaseError = require('../error/baseError');
+const errorTypes = require('../error/errorTypes');
+const httpStatusCodes = require('../error/httpStatusCodes');
+const errorHandler = require('../error/errorHandler');
 
 class UserService {
     async registerUser(name, email, password) {
@@ -30,10 +29,8 @@ class UserService {
             await userRecord.save();           
             await emailVerification.save();
         } catch (err) {
-            console.log(err);
             userRecord.remove();
             emailVerification.remove();
-
             throw errorHandler.getUserModelErrors(err);
         }
 

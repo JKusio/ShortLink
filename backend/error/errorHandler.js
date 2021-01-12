@@ -18,7 +18,6 @@ class ErrorHandler {
         if (err.errors) { 
 
             const errorKeys = Object.keys(err.errors);
-            console.log(err.errors['credentials.password']);
 
             if (errorKeys.includes('name')) errors.push(errorTypes.credentialsError.wrongUsername);
             if (errorKeys.includes('credentials.email')) errors.push(errorTypes.credentialsError.wrongEmail);

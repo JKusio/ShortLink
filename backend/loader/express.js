@@ -6,12 +6,12 @@ const passport = require('passport');
 const session = require('express-session');
 const express = require('express');
 const linkService = require('../services/linkService');
-const events = require('../events');
+const events = require('../event');
 // Error handling
-const BaseError = require('../errors/baseError');
-const errorTypes = require('../errors/errorTypes');
-const httpStatusCodes = require('../errors/httpStatusCodes');
-const errorHandler = require('../errors/errorHandler');
+const BaseError = require('../error/baseError');
+const errorTypes = require('../error/errorTypes');
+const httpStatusCodes = require('../error/httpStatusCodes');
+const errorHandler = require('../error/errorHandler');
 
 module.exports = (app) => {
     app.use(express.urlencoded({ extended: false }))
@@ -70,8 +70,7 @@ module.exports = (app) => {
     app.use((err, req, res, next) => {
         if (errorHandler.isTrustedError(err)) {
             return res.status(err.statusCode)
-            .json({ errors: JSON.parse(err.message) })
-            .end();
+                .json({ errors: err.errorTypes }).end();
         }
         next(err);
     });

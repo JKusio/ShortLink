@@ -4,8 +4,8 @@
   "description": "Backend for Short Link project",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --ignore test/",
+    "test": "mocha"
   },
   "author": "Jakub Kusiowski",
   "license": "MIT",
@@ -25,6 +25,10 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "faker": "^5.1.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.7"
   }
 }

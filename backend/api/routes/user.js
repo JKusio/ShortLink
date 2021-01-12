@@ -2,7 +2,7 @@ const route = require('express').Router();
 const userService = require('../../services/userService');
 const middleware = require('./middleware');
 const passport = require('passport');
-const events = require('../../events');
+const events = require('../../event');
 
 module.exports = (app) => {
     app.use('/users', route);
