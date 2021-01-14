@@ -6,7 +6,7 @@ const LinksCounter = require('../model/linksCounter');
  * We need that because the short code is generated from id number.
  */
 module.exports = async () => {
-    let linksCounter = await LinksCounter.findOne();
+    const linksCounter = await LinksCounter.findOne();
 
     // Create one and only link counter if there is none
     if (!linksCounter) {

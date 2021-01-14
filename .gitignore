@@ -1,6 +1,7 @@
 # enviromental variables
 .env
 
+
 # Logs
 logs
 *.log
@@ -42,3 +43,5 @@ jspm_packages
 
 #Excluding build directory
 public/
+
+data/

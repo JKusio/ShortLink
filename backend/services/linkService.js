@@ -6,10 +6,12 @@ const errorTypes = require('../error/errorTypes');
 const httpStatusCodes = require('../error/httpStatusCodes');
 
 class LinkService {
-    characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
-
+    constructor() {
+        this.characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_';
+    }
+    
     #checkIfURLIsCorrect = (URL) => {
-        var pattern = new RegExp('^(https?:\\/\\/)?'+ 
+        const pattern = new RegExp('^(https?:\\/\\/)?'+ 
         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+
         '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
         '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
@@ -19,7 +21,7 @@ class LinkService {
     }
 
     #generateShortCode = (id) => {
-        let shortURL = [];
+        const shortURL = [];
     
         while (id) {
             shortURL.push(this.characters[id%this.characters.length]);
@@ -32,17 +34,17 @@ class LinkService {
     }
 
     #checkIfCustomCodeIsCorrect = (code) => {
-        for (let i = 0; i < code.length; i++) {
+        for (let i = 0; i < code.length; i+=1) {
             if (!this.characters.includes(code[i])) return false;
         }
         return true;
     }
 
     async getAllLinks() {
-        return await Link.find();
+        return Link.find();
     }
 
-    async createLink(URL, host, userID = undefined, customCode = undefined, expirationDate = undefined) {
+    async createLink(URL, host, userID = undefined, customCode = undefined, linkExpirationDate = undefined) {
         if (!this.#checkIfURLIsCorrect(URL)) throw new BaseError(errorTypes.linkErrors.wrongURL, httpStatusCodes.BAD_REQUEST, true);
 
         const linksCounter = await LinksCounter.findOne();
@@ -56,15 +58,15 @@ class LinkService {
             }
         }
 
-        const code = customCode || this.#generateShortCode(linksCounter.currentID);
+        const linkCode = customCode || this.#generateShortCode(linksCounter.currentID);
 
         const link = new Link({
-            code,
+            code: linkCode,
             originalURL: URL
         });
 
-        if (expirationDate) {
-            const expDate = Date.parse(expirationDate);
+        if (linkExpirationDate) {
+            const expDate = Date.parse(linkExpirationDate);
             if (!expDate) throw new BaseError(errorTypes.linkErrors.wrongExpirationDateFormat, httpStatusCodes.BAD_REQUEST, true);
             if (Date.now() >= expDate) throw new BaseError(errorTypes.linkErrors.expirationDatePassed, httpStatusCodes.BAD_REQUEST, true);
             link.expirationDate = expDate;

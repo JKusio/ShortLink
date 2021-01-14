@@ -3,11 +3,10 @@ const errorTypes = require('./errorTypes');
 const httpStatusCodes = require('./httpStatusCodes');
 
 class ErrorHandler { 
-    // send to admin if critical
-    handleError(error) {
+    // // send to admin if critical
+    // handleError(error) {
         
-    }
-
+    // }
     getUserModelErrors(err) {
         if (err.message != null && err.message.includes('ECONNREFUSED')) {
             return new BaseError(errorTypes.serverErrors.mongodbConnectionError, httpStatusCodes.INTERNAL_SERVER, false);

@@ -3,20 +3,21 @@ const expressLoader = require('./express');
 const passportLoader = require('./passport');
 const linksCounterLoader = require('./linksCounter');
 const mailingLoader = require('./mailing');
+const Logger = require('./logger');
 
 module.exports = async (app) => {
     await mongooseLoader();
-    console.log('DB loaded and connected!');
+    Logger.info('DB loaded and connected!');
 
     await passportLoader();
-    console.log('Passport loaded!');
+    Logger.info('Passport loaded!');
 
     await expressLoader(app);
-    console.log('Express loaded!');
+    Logger.info('Express loaded!');
 
     await linksCounterLoader();
-    console.log('Links counter initalized!');
+    Logger.info('Links counter initalized!');
 
     mailingLoader();
-    console.log('Maling service loaded!');
+    Logger.info('Maling service loaded!');
 }

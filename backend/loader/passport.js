@@ -1,7 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const User = require('../model/user');
 const passport = require('passport');
+const User = require('../model/user');
 // Error handling
 const BaseError = require('../error/baseError');
 const errorTypes = require('../error/errorTypes');
@@ -14,18 +14,14 @@ module.exports = () => {
             return done(new BaseError(errorTypes.loginErrors.wrongCredentials, httpStatusCodes.BAD_REQUEST, true));
         }
 
-        try {
-            if (await bcrypt.compare(password, user.credentials.password)) {
-                if (!user.credentials.emailVerified) {
-                    return done(new BaseError(errorTypes.loginErrors.accountNotVerified, httpStatusCodes.UNAOTHORIZED, true));
-                }        
-                return done(null, user);
-            } else {
-                return done(new BaseError(errorTypes.loginErrors.wrongCredentials, httpStatusCodes.BAD_REQUEST, true));
-            }
-        } catch (err) {
-            throw err;
-        }
+        if (await bcrypt.compare(password, user.credentials.password)) {
+            if (!user.credentials.emailVerified) {
+                return done(new BaseError(errorTypes.loginErrors.accountNotVerified, httpStatusCodes.UNAOTHORIZED, true));
+            }        
+            return done(null, user);
+        } 
+        
+        return done(new BaseError(errorTypes.loginErrors.wrongCredentials, httpStatusCodes.BAD_REQUEST, true));
     }));
 
     passport.serializeUser((user, done) => done(null, user._id));

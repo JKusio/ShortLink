@@ -7,7 +7,7 @@ module.exports = (app) => {
     app.use('/links', route);
 
     // get all shortened links
-    route.get('/', middleware.isAuth, middleware.isAdmin, async (req, res, next) => {
+    route.get('/', middleware.isAuth, middleware.isAdmin, async (req, res) => {
         res.status(200).json(await linkService.getAllLinks());
     });
 

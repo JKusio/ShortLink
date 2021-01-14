@@ -5,8 +5,8 @@ class MailingService {
         const isSecure = port === 465;
 
         this.transporter = nodemailer.createTransport({
-            host: host,
-            port: port,
+            host,
+            port,
             secure: isSecure,
             auth: {
                 user: address,
@@ -23,11 +23,7 @@ class MailingService {
             html
         };
 
-        try {
-            await this.transporter.sendMail(message);
-        } catch(err) {
-            throw err;
-        }
+        await this.transporter.sendMail(message);
     }
 }
 

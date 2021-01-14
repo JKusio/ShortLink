@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema }  = mongoose;
 
 const Link = new Schema({
     code: {
@@ -25,13 +26,13 @@ const Link = new Schema({
     }
 });
 
-Link.pre('save', async function(next) {
+Link.pre('save', async function generateDefaultDate(next) {
     if (this.isModified('expirationDate')) return next();
 
     const expirationDate = this.creationDate;
     expirationDate.setDate(expirationDate.getDate() + 7);
     this.expirationDate = expirationDate;
-    next();
+    return next();
 });
 
 module.exports = mongoose.model('Link', Link);

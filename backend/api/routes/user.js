@@ -1,8 +1,9 @@
 const route = require('express').Router();
+const passport = require('passport');
 const userService = require('../../services/userService');
 const middleware = require('./middleware');
-const passport = require('passport');
 const events = require('../../event');
+const eventTypes = require('../../event/eventTypes');
 
 module.exports = (app) => {
     app.use('/users', route);
@@ -30,12 +31,12 @@ module.exports = (app) => {
 
     // login
     route.get('/login', (req, res, next) => {
-        passport.authenticate('local', (err, user, info) => {
-            if (err) return next(err); 
+        passport.authenticate('local', (passportError, user) => {
+            if (passportError) return next(passportError); 
 
-            req.logIn(user, (err) => {
-                if (err) return next(err);
-                events.emit(events.eventTypes.user.login, user._id);
+            return req.logIn(user, (loginError) => {
+                if (loginError) return next(loginError);
+                events.emit(eventTypes.user.login, user._id);
                 return res.status(200).json({ success: 'Logged in!' });
             });
         })(req, res, next);

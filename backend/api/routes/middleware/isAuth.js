@@ -5,5 +5,5 @@ const httpStatusCodes = require('../../../error/httpStatusCodes');
 
 module.exports = (req, res, next) => {
     if (req.isAuthenticated()) return next();
-    next(new BaseError(errorTypes.loginErrors.notAuthenticated, httpStatusCodes.UNAOTHORIZED, true));
+    return next(new BaseError(errorTypes.loginErrors.notAuthenticated, httpStatusCodes.UNAOTHORIZED, true));
 };

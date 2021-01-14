@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Schema = mongoose.Schema;
+
+const { Schema }  = mongoose;
 
 const UserCredentials = new Schema({
     password: {
@@ -15,7 +16,7 @@ const UserCredentials = new Schema({
         type: String,
         unique: true,
         required: true,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Email not correct!']
+        match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Email not correct!']
     },
     emailVerified: {
         type: Boolean,
@@ -52,7 +53,7 @@ const User = new Schema({
 
 // we can't use arrow functions here because there is no "this" binding in it
 // we will hash password in this middleware
-UserCredentials.pre('save', async function (next) {
+UserCredentials.pre('save', async function modifyPassword(next) {
     if (!this.isModified('password')) return next();
 
     try {
@@ -60,9 +61,9 @@ UserCredentials.pre('save', async function (next) {
         const hashedPassword = await bcrypt.hash(this.password, salt);
         this.passwordSalt = salt;
         this.password = hashedPassword;
-        next();
+        return next();
     } catch (err) {
-        next(err);
+        return next(err);
     }
 });
 

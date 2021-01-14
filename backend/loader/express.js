@@ -1,12 +1,13 @@
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const routes = require('../api');
-const config = require('../config');
 const passport = require('passport');
 const session = require('express-session');
 const express = require('express');
+const routes = require('../api');
+const config = require('../config');
 const linkService = require('../services/linkService');
 const events = require('../event');
+const eventTypes = require('../event/eventTypes');
 // Error handling
 const BaseError = require('../error/baseError');
 const errorTypes = require('../error/errorTypes');
@@ -46,11 +47,9 @@ module.exports = (app) => {
         const language = req.headers['accept-language'];
         const linkCode = req.params.id
 
-        console
-
         try {
             const originalURL = await linkService.getOriginalURL(linkCode);
-            events.emit(events.eventTypes.link.redirect, {referer, language, linkCode});
+            events.emit(eventTypes.link.redirect, {referer, language, linkCode});
             res.redirect(originalURL);
         } catch (err) {
             next(err);
@@ -72,11 +71,11 @@ module.exports = (app) => {
             return res.status(err.statusCode)
                 .json({ errors: err.errorTypes }).end();
         }
-        next(err);
+        return next(err);
     });
 
     // handle all other errors
-    app.use((err, req, res, next) => {
+    app.use((err, req, res) => {
         res.status(500);
         res.json({
             errors: {

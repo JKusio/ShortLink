@@ -6,8 +6,6 @@ const env = dotenv.config();
 
 if (env.error) {
     throw new Error('Could not find .env file!');
-} else {
-    console.log('Loaded configuration from .env file!');
 }
 
 module.exports = {
@@ -22,5 +20,8 @@ module.exports = {
         password: process.env.EMAIL_PASSWORD,
         smtp: process.env.SMTP_ADDRESS,
         port: parseInt(process.env.SMTP_PORT, 10)
+    },
+    logs: {
+        level: process.env.LOG_LEVEL || 'silly',
     }
 }

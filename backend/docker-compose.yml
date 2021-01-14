@@ -1,0 +1,20 @@
+# prettier-ignore
+version: "3"
+services:
+    app:
+        container_name: app
+        restart: always
+        build: .
+        ports:
+            - "3000:3000"
+        links:
+            - mongo
+    mongo:
+        container_name: mongo
+        image: mongo
+        volumes:
+            - mongodata:/data/db
+        ports:
+            - "27017:27017"
+volumes:
+    mongodata:

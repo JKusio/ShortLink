@@ -1,8 +1,9 @@
+const { nanoid } = require('nanoid');
+const mongoose = require('mongoose');
 const User = require('../model/user');
 const EmailVerification = require('../model/emailVerification');
 const events = require('../event');
-const nanoid = require('nanoid').nanoid;
-const mongoose = require('mongoose');
+const eventTypes = require('../event/eventTypes');
 // Error handling
 const BaseError = require('../error/baseError');
 const errorTypes = require('../error/errorTypes');
@@ -34,7 +35,7 @@ class UserService {
             throw errorHandler.getUserModelErrors(err);
         }
 
-        events.emit(events.eventTypes.user.register, {name, email, token});
+        events.emit(eventTypes.user.register, {name, email, token});
 
         return userRecord;
     }
@@ -44,14 +45,10 @@ class UserService {
 
         if (!emailVerification) throw new BaseError(errorTypes.credentialsError.wrongVerficationToken, httpStatusCodes.BAD_REQUEST, true);
 
-        const userID = emailVerification.userID;
+        const { userID } = emailVerification;
 
-        try {
-            await User.findOneAndUpdate({_id: userID}, {$set: { 'credentials.emailVerified': true }}, {useFindAndModify: false});
-            await emailVerification.remove();
-        } catch(err) {
-            throw err;
-        }
+        await User.findOneAndUpdate({_id: userID}, {$set: { 'credentials.emailVerified': true }}, {useFindAndModify: false});
+        await emailVerification.remove();
     }
 
     async isAdmin(userID) {
@@ -71,11 +68,13 @@ class UserService {
     }
 
     async getUserByID(id) {
+        let user;
+
         if (mongoose.isValidObjectId(id)) {
-            var user = await User.findOne({_id: id});
+            user = await User.findOne({_id: id});
         }
         if (user) return user;
-        return await User.findOne({name: id});
+        return User.findOne({name: id});
     }
 
     async changeUserEmail(userID, email) {
