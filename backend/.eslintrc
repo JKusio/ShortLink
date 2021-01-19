@@ -4,8 +4,7 @@
     "parser": "babel-eslint",
     "rules": {
         "no-param-reassign": "off",
-        "no-underscore-dangle": "off",
-        "class-methods-use-this": "off"
+        "no-underscore-dangle": "off"
     },
     "ignorePatterns": ["**/test/*.js"]
 }

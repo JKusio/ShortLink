@@ -5,7 +5,8 @@ const { Schema }  = mongoose;
 const LinksCounter = new Schema({
     currentID: { 
         type: Number,
-        required: true
+        required: true,
+        default: 0
     }
 }, { collection: 'linkscounter'});
 

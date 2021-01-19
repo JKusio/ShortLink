@@ -77,6 +77,7 @@ I've selected MongoDB as my database, and used mongoose ORM. It really simplifie
 ## Getting Started 0️⃣
 
 To get a local copy up and running follow these simple steps! </br>
+You need to have `docker` and `docker-compose` installed on your computer to run the service
 
 ### Installation 💾
 
@@ -119,6 +120,24 @@ EMAIL_ADDRESS=jankowalski@ethereal.email
 EMAIL_PASSWORD=12345678
 SMTP_ADDRESS=smtp.ethereal.email
 SMTP_PORT=587
+```
+
+### Docker 🐳 
+Go to `backend` direcotry
+```
+cd backend/
+```
+
+Run command
+
+```
+docker-compose up -d
+```
+
+To stop the service run
+
+```
+docker-compose down
 ```
 
 ## Backend 🌐

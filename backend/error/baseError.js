@@ -1,5 +1,7 @@
 class BaseError extends Error {
     constructor(errorTypes, statusCode, isOperational) {
+        if (!Array.isArray(errorTypes)) errorTypes = [errorTypes];
+
         super(errorTypes.map((errorType) => errorType.message).join("\n"));
         Object.setPrototypeOf(this, new.target.prototype);
         

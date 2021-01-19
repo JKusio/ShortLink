@@ -1,32 +1,23 @@
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
 const passport = require('passport');
-const User = require('../model/user');
-// Error handling
-const BaseError = require('../error/baseError');
-const errorTypes = require('../error/errorTypes');
-const httpStatusCodes = require('../error/httpStatusCodes');
+const { container } = require('./container');
 
 module.exports = () => {
-    passport.use(new LocalStrategy({usernameField: 'name'}, async (name, password, done) => {
-        const user = await User.findOne({name});
-        if (!user) {
-            return done(new BaseError(errorTypes.loginErrors.wrongCredentials, httpStatusCodes.BAD_REQUEST, true));
-        }
+    const userService = container.resolve('userService');
+    const UserModel = container.resolve('UserModel');
 
-        if (await bcrypt.compare(password, user.credentials.password)) {
-            if (!user.credentials.emailVerified) {
-                return done(new BaseError(errorTypes.loginErrors.accountNotVerified, httpStatusCodes.UNAOTHORIZED, true));
-            }        
+    passport.use(new LocalStrategy({usernameField: 'name'}, async (name, password, done) => {
+        try {
+            const user = await userService.authenticate(name, password);
             return done(null, user);
-        } 
-        
-        return done(new BaseError(errorTypes.loginErrors.wrongCredentials, httpStatusCodes.BAD_REQUEST, true));
+        } catch (error) {
+            return done(error);
+        }
     }));
 
     passport.serializeUser((user, done) => done(null, user._id));
     passport.deserializeUser(async (id, done) => {
-        const user = await User.findOne({_id: id});
+        const user = await UserModel.findOne({_id: id});
         return done(null, user);
     });
 };

@@ -1,16 +1,16 @@
 const nodemailer = require('nodemailer');
 
 class MailingService {
-    setTransporter(host, port, address, password) {
-        const isSecure = port === 465;
+    constructor(mailHost, mailPort, mailAddress, mailPassword) {
+        const isSecure = mailPort === 465;
 
         this.transporter = nodemailer.createTransport({
-            host,
-            port,
+            host: mailHost,
+            port: mailPort,
             secure: isSecure,
             auth: {
-                user: address,
-                pass: password
+                user: mailAddress,
+                pass: mailPassword
             }
         });
     }
@@ -27,4 +27,4 @@ class MailingService {
     }
 }
 
-module.exports = new MailingService();
+module.exports = MailingService;

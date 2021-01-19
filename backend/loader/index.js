@@ -1,11 +1,14 @@
+const { containerSetup } = require('./container');
 const mongooseLoader = require('./mongoose');
 const expressLoader = require('./express');
 const passportLoader = require('./passport');
 const linksCounterLoader = require('./linksCounter');
-const mailingLoader = require('./mailing');
 const Logger = require('./logger');
 
 module.exports = async (app) => {
+    containerSetup();
+    Logger.info('Container created!');
+
     await mongooseLoader();
     Logger.info('DB loaded and connected!');
 
@@ -17,7 +20,4 @@ module.exports = async (app) => {
 
     await linksCounterLoader();
     Logger.info('Links counter initalized!');
-
-    mailingLoader();
-    Logger.info('Maling service loaded!');
-}
+};
