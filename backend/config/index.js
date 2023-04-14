@@ -1,12 +1,6 @@
-const dotenv = require('dotenv');
+require('dotenv/config');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-const env = dotenv.config();
-
-if (env.error) {
-    throw new Error('Could not find .env file!');
-}
 
 module.exports = {
     databseURL: process.env.MONGODB_URI,
